@@ -1,0 +1,31 @@
+<mat-toolbar color="primary">
+  <button mat-button class="sidenav-toggle" (click)="onClick()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  
+  
+  <button  mat-icon-button class="logo-icon" aria-label="Example icon-button with menu icon">
+    Checkin<mat-icon>flight_takeoff</mat-icon>Simulator
+  </button>
+
+  <span class="mtp-spacer"></span>
+  
+  <button *ngIf="!isAuthenticated" mat-icon-button (click)="login()"  aria-label="Example icon-button with share icon">
+    <mat-icon>login</mat-icon>
+  </button>
+  <button mat-icon-button *ngIf="isAuthenticated" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>
+      perm_identity
+    </mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+    <button mat-menu-item disabled>
+      <span>Dark Theme</span>
+    </button>
+    
+  </mat-menu>
+</mat-toolbar>

@@ -1,0 +1,49 @@
+<div *ngIf="$flights | async as flights" class="flightMain">
+    <div class="flightHeader">
+        
+        <mat-button-toggle-group   aria-label="Flight Filter">
+            <mat-button-toggle (click)="toggleClick('00-06')" value="00-06">
+                <mat-icon>brightness_3</mat-icon>
+                00-06
+            </mat-button-toggle>
+            <mat-button-toggle (click)="toggleClick('06-12')" value="06-12">
+                <mat-icon>light_mode</mat-icon>
+                06-12
+            </mat-button-toggle>
+            <mat-button-toggle (click)="toggleClick('12-18')" value="12-18">
+                <mat-icon>brightness_high</mat-icon>
+                12-18
+            </mat-button-toggle>
+            <mat-button-toggle (click)="toggleClick('18-00')" value="18-00">
+                <mat-icon>brightness_medium</mat-icon>
+                18-00
+            </mat-button-toggle>
+           
+          </mat-button-toggle-group>
+          <mat-button-toggle #matClearBtn class="clearBtn" (click)="toggleClick('Clear')" value="Clear">
+            <mat-icon>restart_alt</mat-icon>
+            Reset
+        </mat-button-toggle>
+    </div>
+    <div class="flightRow" *ngFor="let flight of flights">
+        
+        <div class="flightTimeContainer">
+            <div class="flightTime">
+                <mat-icon color="primary" aria-hidden="false" aria-label="flight land">flight_takeoff</mat-icon>
+                <span>{{ flight.departureTime | toTime }}</span>
+            </div>
+            
+            <div class="flightTime">
+                <span>{{ flight.arrivalTime | toTime }}</span>
+                <mat-icon color="primary" aria-hidden="false" aria-label="flight takeoff">flight_land</mat-icon>
+            </div>
+        </div>
+        <div class="flightDestinationContainer">
+            <p>{{ flight.source}} &#8594; {{flight.destination }}</p>
+            <p>{{flight.flightCode}} • {{ flight.airBusFamily }}</p>
+            
+        </div>
+        <span class="highlight-status" [ngStyle]="{'color':getColor(flight.status)}">{{flight.status}}</span>
+        
+    </div>
+</div>
